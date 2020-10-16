@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using WhatShouldWeEat.repository;
 using WhatShouldWeEat.Data;
 
 namespace WhatShouldWeEat
