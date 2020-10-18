@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WhatShouldWeEat.Controllers.dto
+﻿namespace WhatShouldWeEat.Controllers.dto
 {
     public class TestDTO
     {
         private int id { get; set; }
 
         private string _text;
+
         public string text
         {
             get { return _text; }
@@ -21,6 +17,5 @@ namespace WhatShouldWeEat.Controllers.dto
             this.id = id;
             this.text = text;
         }
-
     }
 }

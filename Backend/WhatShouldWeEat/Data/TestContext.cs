@@ -4,7 +4,7 @@ namespace WhatShouldWeEat.Data
 {
     public class TestContext : DbContext
     {
-        public TestContext (DbContextOptions<TestContext> options)
+        public TestContext(DbContextOptions<TestContext> options)
             : base(options)
         {
             //this.Database.EnsureCreated();

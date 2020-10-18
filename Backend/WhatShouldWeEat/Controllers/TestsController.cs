@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WhatShouldWeEat.Data;
+using WhatShouldWeEat.exceptions;
 
 namespace WhatShouldWeEat.Controllers
 {
@@ -13,32 +12,34 @@ namespace WhatShouldWeEat.Controllers
     [ApiController]
     public class TestsController : ControllerBase
     {
+        private readonly ITestService _testService;
         private readonly TestContext _context;
 
-        public TestsController(TestContext context)
+        public TestsController(ITestService testService, TestContext testContext)
         {
-            _context = context;
+            _testService = testService;
+            _context = testContext;
         }
 
         // GET: api/Tests
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Test>>> GetTest()
         {
-            return await _context.Tests.ToListAsync();
+            return await _testService.getAllTests();
         }
 
         // GET: api/Tests/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Test>> GetTest(int id)
         {
-            var test = await _context.Tests.FindAsync(id);
-
-            if (test == null)
+            try
             {
-                return NotFound();
+                return await _testService.findTestbyId(id);
             }
-
-            return test;
+            catch (NotFoundException e)
+            {
+                return NoContent();
+            }
         }
 
         // PUT: api/Tests/5
